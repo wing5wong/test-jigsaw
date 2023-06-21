@@ -1,0 +1,15 @@
+<!-- search/social -->
+<meta name="referrer" content="always">
+<link rel="canonical" href="{{ $page->getUrl() }}">
+
+<meta property="og:title" content="{{ $page->title ?: $page->site->title }}">
+<meta property="og:image" content="{{ $page->imageCdn($page->image ? $page->image : $page->site->image) }}">
+<meta property="og:type" content="{{ $page->isPost ? 'article' : 'website' }}">
+<meta property="og:url" content="{{ $page->getUrl() }}">
+
+<meta name="twitter:title" content="{{ $page->title ?: $page->site->title }}">
+<meta name="twitter:image" content="{{ $page->imageCdn($page->image ? $page->image : $page->site->image) }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="{{ "@{$page->owner->twitter}" }}">
+<meta name="twitter:creator" content="{{ "@{$page->owner->twitter}" }}">
+<!-- end search/social -->

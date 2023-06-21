@@ -1,0 +1,139 @@
+@import '../css/bootstrap.min.css';
+
+$fa-font-path: "../webfonts";
+
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+@import '../css/swiper.min.css';
+@import '../css/customisations.css';
+
+*+h1, *+h2, *+h3, *+h4, *+h5, *+h6 {
+    margin-top: 1.5em;
+}
+
+.site-banner {
+    background-image: linear-gradient(45deg, transparent 50%, #fff 85%),url("https://res.cloudinary.com/whanganuihigh/image/upload/e_auto_brightness/e_auto_color/e_auto_contrast/e_auto_saturation/c_fill,q_80,w_1920,h_300/v1554149856/school-girls-circle-hero-min.jpg");
+    -webkit-background-size: 100%, cover;
+    background-size: 100%, cover;
+    background-position: center, center;
+}
+
+.site-banner-home {
+    background-image: linear-gradient(45deg,transparent 50%,#fff 85%),url("https://res.cloudinary.com/whanganuihigh/image/upload/e_auto_brightness/e_auto_color/e_auto_contrast/e_auto_saturation/g_auto,c_lfill,q_80,w_1920,h_650/v1554149856/school-girls-circle-hero-min.jpg");
+}
+
+.feature-image-banner {
+   min-height:45vh;
+    background-image: url("https://res.cloudinary.com/whanganuihigh/image/upload/e_auto_brightness/e_auto_color/e_auto_contrast/e_auto_saturation/c_scale,q_80,w_1920/v1554082592/feature-image.jpg")
+}
+
+summary>.d-table {
+    display: inline-table !important;
+}
+
+img {
+    max-width: 100%;
+}
+
+h1+img,
+p>img {
+    margin: 3em 0;
+}
+
+.featured {
+    display: inline-block;
+    margin-bottom: 3em;
+    margin-top: 3em;
+    text-align: center;
+}
+
+a.featured[title]:after {
+    content: attr(title);
+    padding: 4px 8px;
+    color: #FFF;
+    background-color: #074631;
+    display: block;
+    }
+  
+      .image-credit {
+          margin: -2em 0 2em 0;
+      }
+  
+
+
+
+h1 {
+    font-size: calc(26px + 1vw);
+}
+
+h2 {
+    font-size: calc(16px + 1vw);
+}
+
+h3 {
+    font-size: calc(12px + 1vw);
+}
+
+h1+.featured {
+    margin-top: 0;
+}
+
+.image-gallery {
+    margin-top: 2em;
+}
+
+.badge-vp-service {
+    background: #0091bc
+}
+
+.badge-vp-creative {
+    background: #f0c500
+}
+
+.badge-vp-social {
+    background: #453f85
+}
+
+.badge-vp-primary {
+    background: #3c8a2c
+}
+
+.badge-vp-construction {
+    background: #d26601
+}
+
+.badge-vp-manufacturing {
+    background: #ac080a
+}
+
+.badge-vp-service:hover {
+    background: darken(#0091bc, 10%)
+}
+
+.badge-vp-creative:hover {
+    background: darken(#f0c500, 10%)
+}
+
+.badge-vp-social:hover {
+    background: darken(#453f85, 10%)
+}
+
+.badge-vp-primary:hover {
+    background: darken(#3c8a2c, 10%)
+}
+
+.badge-vp-construction:hover {
+    background: darken(#d26601, 10%)
+}
+
+.badge-vp-manufacturing:hover {
+    background: darken(#ac080a, 10%)
+}
+
+main {
+    b, strong{
+        color: #074631;
+        font-size: 1.2em;
+    }
+}

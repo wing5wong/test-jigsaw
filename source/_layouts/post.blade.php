@@ -1,47 +1,53 @@
-@extends('_layouts.main')
+@extends('_layouts.standard') 
 
-@php
-    $page->type = 'article';
-@endphp
+@section('title', $page->title) 
 
-@section('body')
-    @if ($page->cover_image)
-        <img src="{{ $page->cover_image }}" alt="{{ $page->title }} cover image" class="mb-2">
+@section('content')
+<main>
+    <h1 class="decorated py-3 mb-4">{{ $page->title }}</h1>
+
+
+    @if ($page->image or $page->feature_image)
+        <a href="{{ $page->feature_image["image"] ?? $page->image }}"
+         @if($page->image_title or data_get($page,"feature_image.description"))title="{{data_get($page,"feature_image.description") ?? $page->image_title}}"@endif 
+         @if($page->image_alt or data_get($page,"feature_image.alt"))alt="{{data_get($page,"feature_image.alt") ?? $page->image_alt}}"@endif 
+         class="featured">
+                <img class="featured-image"  style="object-fit: cover; max-width:100%; display: block; object-fit: contain; max-width: 100%; display: block;" 
+                src="{{str_replace("https://res.cloudinary.com/whanganuihigh/image/upload/","https://res.cloudinary.com/whanganuihigh/image/upload/q_auto,f_auto,h_400,c_lfill,g_auto/", $page->feature_image["image"] ?? $page->image)}}"
+                srcset="
+                {{str_replace("https://res.cloudinary.com/whanganuihigh/image/upload/","https://res.cloudinary.com/whanganuihigh/image/upload/q_auto,f_auto,h_400,c_lfill,g_auto/", $page->feature_image["image"] ?? $page->image)}}
+                "
+        alt="" style="max-width: 100%">
+        </a>
+        @if($page->image_credit or ($page->feature_image and array_key_exists('credit',$page->feature_image)))
+        <div class="image-credit">
+            <em>Photo / {{$page->feature_image["credit"] ?? $page->image_credit}}</em>
+        </div>
+        @endif
+
     @endif
 
-    <h1 class="leading-none mb-2">{{ $page->title }}</h1>
+    @yield('postContent')
 
-    <p class="text-gray-700 text-xl md:mt-0">{{ $page->author }}  •  {{ date('F j, Y', $page->date) }}</p>
+    @if($page->news_author)
+        <p>
+            <em>
+                @if($page->news_author and array_key_exists('name',$page->news_author)){{$page->news_author["name"]}} <br>@endif
+                @if($page->news_author and array_key_exists('publication',$page->news_author)){{ $page->news_author["publication"]}}@endif @if($page->news_author and array_key_exists('date',$page->news_author)){{ date('j/n/y', $page->news_author["date"]) }}@endif
+            </em>
+        </p>
 
-    @if ($page->categories)
-        @foreach ($page->categories as $i => $category)
-            <a
-                href="{{ '/blog/categories/' . $category }}"
-                title="View posts in {{ $category }}"
-                class="inline-block bg-gray-300 hover:bg-blue-200 leading-loose tracking-wide text-gray-800 uppercase text-xs font-semibold rounded mr-4 px-3 pt-px"
-            >{{ $category }}</a>
+    @endif
+
+    @if(is_array($page->image_gallery))
+    <div class="image-gallery row">
+        @foreach($page->image_gallery as $image)
+        <div class="col-sm-6 col-md-4 col-lg-4">
+        <img src="{{ str_replace("https://res.cloudinary.com/whanganuihigh/image/upload/","https://res.cloudinary.com/whanganuihigh/image/upload/c_lfill,q_80,w_300,h_300/",$image["image"])}}" @isset($image["description"])alt="{{$image["description"]}}"@endisset @isset($image["description"])title="{{$image["description"]}}"@endisset data-image-url="{{$image["image"]}}">
+        </div>
         @endforeach
-    @endif
-
-    <div class="border-b border-blue-200 mb-10 pb-4" v-pre>
-        @yield('content')
     </div>
-
-    <nav class="flex justify-between text-sm md:text-base">
-        <div>
-            @if ($next = $page->getNext())
-                <a href="{{ $next->getUrl() }}" title="Older Post: {{ $next->title }}">
-                    &LeftArrow; {{ $next->title }}
-                </a>
-            @endif
-        </div>
-
-        <div>
-            @if ($previous = $page->getPrevious())
-                <a href="{{ $previous->getUrl() }}" title="Newer Post: {{ $previous->title }}">
-                    {{ $previous->title }} &RightArrow;
-                </a>
-            @endif
-        </div>
-    </nav>
+    @endif
+     </main>
+    @include('_partials.lastReviewed')
 @endsection
