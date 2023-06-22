@@ -1,4 +1,0 @@
----
-title: Biology
-faculty: Sciences
----

@@ -16,3 +16,24 @@
 
 $events->afterBuild(App\Listeners\GenerateSitemap::class);
 $events->afterBuild(App\Listeners\GenerateIndex::class);
+
+
+function media($path)
+{
+    $cloudName = $GLOBALS['container']->config['services']['cloudinary']['cloudName'];
+    return "https://res.cloudinary.com/{$cloudName}/{$path}";
+}
+
+function content_sanitize($value)
+{
+    return str_replace(["\r", "\n", "\r\n", '  '], ' ', strip_tags($value));
+}
+
+function str_limit_soft($value, $limit = 100, $end = '...')
+{
+    if (mb_strlen($value, 'UTF-8') <= $limit) {
+        return $value;
+    }
+
+    return rtrim(strtok(wordwrap($value, $limit, "\n"), "\n"), ' .') . $end;
+}
