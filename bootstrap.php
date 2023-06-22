@@ -14,8 +14,8 @@
  * });
  */
 
-$events->afterBuild(App\Listeners\GenerateSitemap::class);
-$events->afterBuild(App\Listeners\GenerateIndex::class);
+// $events->afterBuild(App\Listeners\GenerateSitemap::class);
+// $events->afterBuild(App\Listeners\GenerateIndex::class);
 
 
 function media($path)
@@ -26,7 +26,7 @@ function media($path)
 
 function content_sanitize($value)
 {
-    return str_replace(["\r", "\n", "\r\n", '  '], ' ', strip_tags($value));
+    return str_replace(["\r", "\n", "\r\n", '  '], ' ', strip_tags($value) ?? '');
 }
 
 function str_limit_soft($value, $limit = 100, $end = '...')
